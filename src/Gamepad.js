@@ -45,42 +45,22 @@ class Gamepad extends React.Component {
   constructor(props, context) {
     super(props, context)
 
+
     this.padState = {
       connected: false,
+      buttons: {},
+      axis: {}
+    };
 
-      buttons: {
-        A: false,
-        B: false,
-        X: false,
-        Y: false,
+    for (const button in props.buttons) {
+      this.padState.buttons[button] = false;
+    }
 
-        LB: false,
-        LT: false,
-        LS: false,
-
-        RB: false,
-        RT: false,
-        RS: false,
-
-        Start: false,
-        Back: false,
-
-        DPadUp: false,
-        DPadRight: false,
-        DPadDown: false,
-        DPadLeft: false,
-      },
-
-      axis: {
-        LeftStickX: 0.0,
-        LeftStickY: 0.0,
-
-        RightStickX: 0.0,
-        RightStickY: 0.0,
-
-        RightTrigger: 0.0,
-        LeftTrigger: 0.0,
+    for (let axis in [...props.axis, ...props.buttonAxis]) {
+      if (axis && !axis.startsWith('_')) {
+        this.padState.axis[axis] = 0.0;
       }
+      
     }
   }
 

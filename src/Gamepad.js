@@ -51,12 +51,12 @@ class Gamepad extends React.Component {
       buttons: {},
       axis: {}
     };
-
-    for (const button in props.buttons) {
+    const { layout } = props;
+    for (const button in layout.buttons) {
       this.padState.buttons[button] = false;
     }
 
-    for (let axis in [...props.axis, ...props.buttonAxis]) {
+    for (let axis in [...layout.axis, ...layout.buttonAxis]) {
       if (axis && !axis.startsWith('_')) {
         this.padState.axis[axis] = 0.0;
       }
